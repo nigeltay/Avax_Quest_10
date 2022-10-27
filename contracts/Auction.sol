@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Unlicense
 pragma solidity ^0.7.0;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
@@ -59,7 +60,7 @@ contract Auction {
         }
         return (addrs, bidPrice);
     }
-
+    
 
     // Place a bid on the auction
     function placeBid() payable external returns(bool){

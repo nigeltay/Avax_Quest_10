@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Unlicense
 pragma solidity ^0.7.0;
 
 import "./Auction.sol";
@@ -8,7 +9,8 @@ contract AuctionManager {
     mapping(uint => Auction) public auctions; // auctions
     
     // create an auction
-    function createAuction(uint _endTime, uint _minIncrement, uint _directBuyPrice,uint _startPrice,address _nftAddress,uint _tokenId) external returns (bool){
+    function createAuction(uint _endTime, uint _minIncrement, uint _directBuyPrice,
+            uint _startPrice,address _nftAddress,uint _tokenId) external returns (bool){
         require(_directBuyPrice > 0); // direct buy price must be greater than 0
         require(_startPrice < _directBuyPrice); // start price is smaller than direct buy price
         require(_endTime > 5 minutes); // end time must be greater than 5 minutes (setting it to 5 minutes for testing you can set it to 1 days or anything you would like)
