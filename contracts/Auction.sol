@@ -90,10 +90,14 @@ contract Auction {
 
     // Withdraw the token after the auction is over
     function withdrawToken() external returns(bool){
-        require(getAuctionState() == AuctionState.ENDED || getAuctionState() == AuctionState.DIRECT_BUY); // The auction must be ended by either a direct buy or timeout
-        require(msg.sender == maxBidder); // The highest bidder can only withdraw the token
-        _nft.transferFrom(address(this), maxBidder, tokenId); // Transfer the token to the highest bidder
-        emit WithdrawToken(maxBidder); // Emit a withdraw token event
+        // 1) The auction must be ended by either a direct buy or timeout
+
+        // 2) The highest bidder can only withdraw the token
+        
+        // 3) Transfer the token to the highest bidder
+        
+        // 4) Emit a withdraw token event
+
     }
 
     // Withdraw the funds after the auction is over
@@ -105,21 +109,31 @@ contract Auction {
     } 
 
     function cancelAuction() external returns(bool){ // Cancel the auction
-        require(msg.sender == creator); // Only the auction creator can cancel the auction
-        require(getAuctionState() == AuctionState.OPEN); // The auction must be open
-        require(maxBid == 0); // The auction must not be cancelled if there is a bid
-        isCancelled = true; // The auction has been cancelled
-        _nft.transferFrom(address(this), creator, tokenId); // Transfer the NFT token to the auction creator
-        emit AuctionCanceled(); // Emit Auction Canceled event
+        // 1) Only the auction creator can cancel the auction
+
+        // 2) The auction must be open
+
+        // 3) The auction must not be cancelled if there is a bid
+
+        // 4) set  auction to cancelled state to true
+
+        // 5) Transfer the NFT token to the auction creator
+
+        // 6) Emit Auction Canceled event
+
         return true;
     } 
 
     // Get the auction state
     function getAuctionState() public view returns(AuctionState) {
-        if(isCancelled) return AuctionState.CANCELLED; // If the auction is cancelled return CANCELLED
-        if(isDirectBuy) return AuctionState.DIRECT_BUY; // If the auction is ended by a direct buy return DIRECT_BUY
-        if(block.timestamp >= endTime) return AuctionState.ENDED; // The auction is over if the block timestamp is greater than the end timestamp, return ENDED
-        return AuctionState.OPEN; // Otherwise return OPEN
+         // 1) If the auction is cancelled return CANCELLED
+
+         // 2) If the auction is ended by a direct buy return DIRECT_BUY
+
+         // 3) The auction is over if the block timestamp is greater than the end timestamp, return ENDED
+
+         // 4) Otherwise return OPEN
+
     } 
 
     event NewBid(address bidder, uint bid); // A new bid was placed
