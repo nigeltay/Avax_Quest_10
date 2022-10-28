@@ -139,7 +139,7 @@ contract Auction {
     event NewBid(address bidder, uint bid); // A new bid was placed
     event WithdrawToken(address withdrawer); // The auction winner withdrawed the token
     event WithdrawFunds(address withdrawer, uint256 amount); // The auction owner withdrawed the funds
-    event AuctionCanceled(); // The auction was cancelled
+    event AuctionCancelled(); // The auction was cancelled
 
 
     
