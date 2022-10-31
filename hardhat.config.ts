@@ -1,23 +1,29 @@
+import { HardhatUserConfig, task } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomiclabs/hardhat-waffle";
-const PRIVATE_KEY = "REPLACE_WITH_YOUR_PRIVATE_KEY"; // Your wallets private key
 
-module.exports = {
-  solidity: {
-    version: "0.7.0",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 200,
-      },
-    },
-  },
+const PRIVATE_KEY = "INSERT_YOUR_RECOVERY_KEY_PHRASE_HERE";
+
+task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
+  const accounts = await hre.ethers.getSigners();
+
+  for (const account of accounts) {
+    console.log(account.address);
+  }
+});
+
+const config: HardhatUserConfig = {
+  solidity: "0.7.0",
 
   networks: {
     fuji: {
       url: "https://api.avax-test.network/ext/bc/C/rpc",
-      chainId: 43113,
-      accounts: [PRIVATE_KEY],
+
+      accounts: {
+        mnemonic: PRIVATE_KEY,
+      },
     },
   },
 };
+
+export default config;
